@@ -8,6 +8,7 @@
             <div class="navbar-nav">
                 <a href="/home" class="nav-item nav-link">Home</a>
                 <a href="/allUsers" class="nav-item nav-link">All Users</a>
+                <a href="/testForm" class="nav-item nav-link">Digital Signature</a>
             </div>
             <div class="navbar-nav ms-auto">
                 <a href="userProfile" class="btn btn-primary"><span><i class="fa-solid fa-circle-user"></i> User Profile</span></a>&nbsp;&nbsp;

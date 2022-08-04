@@ -65,10 +65,10 @@
                           </div>
                           <div class="col-md-6">
                             <label   class="form-label">Gender</label>
-                            <select name="Gender" value="{{ old('Gender') }}" class="form-control" >
+                            <select name="Gender" class="form-control" >
                                 <option disabled selected>Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option value="Male" {{ old('Gender') == 'Male' ? 'selected' : ''}}>Male</option>
+                                <option value="Female" {{ old('Gender') == 'Female' ? 'selected' : ''}}>Female</option>
                             </select>
                             @if ($errors->has('Gender'))
                                 <span class="text-danger">{{ $errors->first('Gender') }}</span>
@@ -79,14 +79,14 @@
                       <div class="row g-3 mt-0">
                         <div class="col-md-6">
                             <label  class="form-label" >Password</label>
-                            <input name="password"  type="Password" class="form-control" >
+                            <input name="password"  type="Password" value="{{ old('password') }}"class="form-control" >
                             @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                             @endif
                           </div>
                           <div class="col-md-6">
                             <label  class="form-label">Confirm Pasword</label>
-                            <input type="password"  name="cpassword" class="form-control" >
+                            <input type="password"  name="cpassword" value="{{ old('cpassword') }}"class="form-control" >
                             @if ($errors->has('cpassword'))
                                 <span class="text-danger">{{ $errors->first('cpassword') }}</span>
                             @endif

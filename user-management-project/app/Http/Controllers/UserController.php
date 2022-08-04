@@ -59,7 +59,7 @@ class UserController extends Controller
             $request->validate([
                 "fname" => "required",
                 "lname" => "required",
-                "email" => "required|email|unique:users",
+                "email" => "required|email",
                 "dob" => "required",
                 "Gender" =>  "required",
                 "password" => "required|min:6",
@@ -70,7 +70,6 @@ class UserController extends Controller
                 "fname.required" => "First Name Required",
                 "lname.required" => "Last Name Required",
                 "email.required" => "Email Required",
-                "email.unique" => "Email Already Exists",
                 "email.email" => "Email Not Valid",
                 "dob.required" => "Date of Birth Required",
                 "gender.required" => "Gender Required",
@@ -80,19 +79,23 @@ class UserController extends Controller
 
             ]
         );
+        $userData = ComUser::where("email","=", $request->email)->first();
 
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
+        if(!$userData){
+            $input = $request->all();
+            $input['password'] = bcrypt($input['password']);
 
-        $user = ComUser::create($input);
+            $user = ComUser::create($input);
 
-        if($user){
-            return back()->with('success',"Registration Successfully...!")->withInput();
+            if($user){
+                return back()->with('success',"Registration Successfully...!")->withInput();
+            }else{
+                return back()->with('fail',"Something Went Wrong....!")->withInput();
+
+            }
         }else{
-            return back()->with('fail',"Something Went Wrong....!")->withInput();
-
+            return back()->with('fail',"Email Already Exists!")->withInput();
         }
-
 
     }
 
