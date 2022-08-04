@@ -14,9 +14,9 @@
 
                             <div class="col-md-12 mb-3">
                                 <label   class="form-label">Full Name</label>
-                                <input name="name" type="text" value="{{ old('name') }}" class="form-control" >
-                                @if ($errors->has('name'))
-                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                <input name="full_name" type="text" value="{{ old('full_name') }}" class="form-control" >
+                                @if ($errors->has('full_name'))
+                                    <span class="text-danger">{{ $errors->first('full_name') }}</span>
                                 @endif
                             </div>
 
