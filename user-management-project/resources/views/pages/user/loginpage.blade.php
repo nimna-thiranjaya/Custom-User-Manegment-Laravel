@@ -3,11 +3,12 @@
 @section('content')
 <div class="login-form">
     @if(Session::has('fail'))
-    <div class="alert alert-danger container">
-    {{ Session::get('fail') }}
-    @php
-        Session::forget('fail');
-    @endphp
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ Session::get('fail') }}
+        @php
+            Session::forget('fail');
+        @endphp
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
     <form action={{ route('user.userlogin') }} method="POST">

@@ -183,7 +183,7 @@ class UserController extends Controller
 
                     $user->update();
 
-                    return redirect("/userProfile")->with('success',"Password Reset Success...!");
+                    return redirect("/userProfile")->with('passSuccess',"Password Reset Success...!");
 
                 }else{
                     return back()->with('fail',"Current and New both Passwords are Same...!");

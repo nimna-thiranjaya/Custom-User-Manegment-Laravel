@@ -12,6 +12,18 @@
                 </div>
         @endif
 
+
+        @if(Session::has('passSuccess'))
+            <div class="alert alert-success container">
+                {{ Session::get('passSuccess') }}
+                @php
+                    Session::forget('passSuccess');
+                    session()->remove("Authorization");
+                    header("refresh:2;url=/");
+                @endphp
+            </div>
+        @endif
+
         @if(Session::has('fail'))
         <div class="alert alert-danger container">
             {{ Session::get('fail') }}
