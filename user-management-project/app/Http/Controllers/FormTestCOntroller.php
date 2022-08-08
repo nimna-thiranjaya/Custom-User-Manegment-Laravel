@@ -43,6 +43,6 @@ class FormTestCOntroller extends Controller
         // }else{
         //     return Redirect("/")->with("fail","Please Login...!");
         // }
-        dd($request);
+        return $request->input();
     }
 }
