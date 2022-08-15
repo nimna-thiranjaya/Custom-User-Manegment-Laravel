@@ -10,6 +10,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use PharIo\Manifest\Email;
 use phpDocumentor\Reflection\DocBlock\Tags\See;
@@ -79,6 +80,7 @@ class UserController extends Controller
 
             ]
         );
+
         $userData = ComUser::where("email","=", $request->email)->first();
 
         if(!$userData){
@@ -88,7 +90,14 @@ class UserController extends Controller
             $user = ComUser::create($input);
 
             if($user){
-                return back()->with('success',"Registration Successfully...!")->withInput();
+                $details = [
+                    'title' => 'Register Confirmation',
+                    'body' => "Dear $request->fname $request->lname,"
+                ];
+
+                Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
+
+                return back()->with('success',"Registration Successfully, Check your mail...!")->withInput();
             }else{
                 return back()->with('fail',"Something Went Wrong....!")->withInput();
 
