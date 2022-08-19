@@ -7,6 +7,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Name\FullyQualified;
 
 class FormTestCOntroller extends Controller
@@ -31,34 +32,21 @@ class FormTestCOntroller extends Controller
     // }
 
     public function saveSignature(Request $request){
-        // $userid = Session("Authorization");
 
-        // if($userid){
+            $request->validate([
+                "file_one" => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048',
+            ]);
 
-        //     $request->validate([
-        //         "full_name" => "required",
-        //         "signed" => "required",
-        //         "user_id" => "required"
-        //     ]);
 
-        //     if($request->signed){
 
-        //         $input = $request->all();
-        //         $input = $userid;
-        //         $result = UserSignature::create($input);
+            if ($request->hasFile('file_one')) {
+                $file = $request->file('file_one');
+                $path = "uploads/";
+                $uploaded = $file->move(public_path($path),"Nimna".'.'.$file->getClientOriginalExtension());
+            }
 
-        //         if($result){
-        //             return Redirect("/userProfile")->with("success","Signature saved successfully...!");
-        //         }else{
-        //             return Redirect("/userProfile")->with("fail","Something Went Wrong...!");
-        //         }
-        //     }else{
-        //         return back()->with("fail","Please add your Signature...!");
-        //     }
 
-        // }else{
-        //     return Redirect("/")->with("fail","Please Login...!");
-        // }
-        return $request->input();
+            dd($request);
+
     }
 }

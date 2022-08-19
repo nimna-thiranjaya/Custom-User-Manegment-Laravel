@@ -95,7 +95,7 @@ class UserController extends Controller
                     'body' => "Dear $request->fname $request->lname,"
                 ];
 
-                Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
+                // Mail::to($request->email)->send(new \App\Mail\MyTestMail($details));
 
                 return back()->with('success',"Registration Successfully, Check your mail...!")->withInput();
             }else{
